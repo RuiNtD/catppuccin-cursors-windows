@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "build": "deno run -A build.ts"
+    "build": "deno run -A build.ts",
+    "installAll": "sudo deno run -A installAll.ts"
   },
   "imports": {
     "@david/dax": "jsr:@david/dax@^0.40.1",

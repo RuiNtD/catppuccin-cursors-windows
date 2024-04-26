@@ -66,10 +66,9 @@ if (import.meta.main) {
   const outdir = $.path("win");
   await outdir.emptyDir();
 
-  const pb = $.progress("Building Cursors", {
+  const pb = $.progress("Building", {
     length: [...$.path("orig/cursors").readDirSync()].length,
   });
-
   await pb.with(async () => {
     for await (const zip of $.path("orig/cursors").expandGlob("*.zip")) {
       const basename = zip.path.withExtname("").basename();
@@ -88,12 +87,12 @@ if (import.meta.main) {
       }
       await processFolder(indir, outdir.join(basename));
 
-      const zipWriter = new ZipWriter(
-        await outdir.join(`${basename}.zip`).open({ write: true, create: true })
-      );
-      for await (const file of outdir.join(basename).expandGlob("*"))
-        await zipWriter.add(`${basename}/${file.name}`, await file.path.open());
-      await zipWriter.close();
+      // const zipWriter = new ZipWriter(
+      //   await outdir.join(`${basename}.zip`).open({ write: true, create: true })
+      // );
+      // for await (const file of outdir.join(basename).expandGlob("*"))
+      //   await zipWriter.add(`${basename}/${file.name}`, await file.path.open());
+      // await zipWriter.close();
 
       // outdir.join(basename).remove({ recursive: true });
       pb.increment();
