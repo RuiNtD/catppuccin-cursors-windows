@@ -6,11 +6,10 @@ if (!(await isAdmin())) throw "Administrator required";
 
 const outDir = $.path("win");
 
-for await (const dir of outDir.readDir()) {
-  if (!dir.isDirectory) continue;
-  await dir.path.remove({ recursive: true });
-}
-
+// for await (const dir of outDir.readDir()) {
+//   if (!dir.isDirectory) continue;
+//   await dir.path.remove({ recursive: true });
+// }
 // const zips = [...outDir.expandGlobSync("*.zip")];
 
 // const pb1 = $.progress("Extracting", {
