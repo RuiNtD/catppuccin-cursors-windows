@@ -1,5 +1,5 @@
 import $, { Path } from "@david/dax";
-import { Uint8ArrayWriter, ZipReader, ZipWriter } from "@zip-js/zip-js";
+import { Uint8ArrayWriter, ZipReader } from "@zip-js/zip-js";
 import * as ini from "@std/ini";
 
 const cursors = [
