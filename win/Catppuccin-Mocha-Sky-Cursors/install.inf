@@ -1,0 +1,26 @@
+[Version]
+signature = $CHICAGO$
+[DefaultInstall]
+CopyFiles = Scheme.Cur, Scheme.Txt
+AddReg = Scheme.Reg
+[DestinationDirs]
+Scheme.Cur = 10,"Cursors\Catppuccin\Mocha\Sky"
+Scheme.Txt = 10,"Cursors\Catppuccin\Mocha\Sky"
+[Scheme.Reg]
+0 = HKCU,"Control Panel\Cursors\Schemes","Catppuccin Mocha Sky",0x00020000,"%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\default.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\help.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\progress.ani,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\wait.ani,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\cross.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\text.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\pencil.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\not-allowed.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\ns-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\ew-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\nwse-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\nesw-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\all-scroll.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\up-arrow.cur,%SYSTEMROOT%\Cursors\Catppuccin\Mocha\Sky\pointer.cur,,"
+[Scheme.Cur]
+0 = default.cur
+1 = help.cur
+2 = progress.ani
+3 = wait.ani
+4 = cross.cur
+5 = text.cur
+6 = pencil.cur
+7 = not-allowed.cur
+8 = ns-resize.cur
+9 = ew-resize.cur
+10 = nwse-resize.cur
+11 = nesw-resize.cur
+12 = all-scroll.cur
+13 = up-arrow.cur
+14 = pointer.cur

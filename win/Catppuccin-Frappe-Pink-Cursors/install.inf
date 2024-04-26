@@ -1,0 +1,26 @@
+[Version]
+signature = $CHICAGO$
+[DefaultInstall]
+CopyFiles = Scheme.Cur, Scheme.Txt
+AddReg = Scheme.Reg
+[DestinationDirs]
+Scheme.Cur = 10,"Cursors\Catppuccin\Frappe\Pink"
+Scheme.Txt = 10,"Cursors\Catppuccin\Frappe\Pink"
+[Scheme.Reg]
+0 = HKCU,"Control Panel\Cursors\Schemes","Catppuccin Frappe Pink",0x00020000,"%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\default.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\help.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\progress.ani,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\wait.ani,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\cross.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\text.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\pencil.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\not-allowed.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\ns-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\ew-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\nwse-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\nesw-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\all-scroll.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\up-arrow.cur,%SYSTEMROOT%\Cursors\Catppuccin\Frappe\Pink\pointer.cur,,"
+[Scheme.Cur]
+0 = default.cur
+1 = help.cur
+2 = progress.ani
+3 = wait.ani
+4 = cross.cur
+5 = text.cur
+6 = pencil.cur
+7 = not-allowed.cur
+8 = ns-resize.cur
+9 = ew-resize.cur
+10 = nwse-resize.cur
+11 = nesw-resize.cur
+12 = all-scroll.cur
+13 = up-arrow.cur
+14 = pointer.cur

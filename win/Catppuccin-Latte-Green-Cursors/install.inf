@@ -1,0 +1,26 @@
+[Version]
+signature = $CHICAGO$
+[DefaultInstall]
+CopyFiles = Scheme.Cur, Scheme.Txt
+AddReg = Scheme.Reg
+[DestinationDirs]
+Scheme.Cur = 10,"Cursors\Catppuccin\Latte\Green"
+Scheme.Txt = 10,"Cursors\Catppuccin\Latte\Green"
+[Scheme.Reg]
+0 = HKCU,"Control Panel\Cursors\Schemes","Catppuccin Latte Green",0x00020000,"%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\default.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\help.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\progress.ani,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\wait.ani,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\cross.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\text.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\pencil.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\not-allowed.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\ns-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\ew-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\nwse-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\nesw-resize.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\all-scroll.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\up-arrow.cur,%SYSTEMROOT%\Cursors\Catppuccin\Latte\Green\pointer.cur,,"
+[Scheme.Cur]
+0 = default.cur
+1 = help.cur
+2 = progress.ani
+3 = wait.ani
+4 = cross.cur
+5 = text.cur
+6 = pencil.cur
+7 = not-allowed.cur
+8 = ns-resize.cur
+9 = ew-resize.cur
+10 = nwse-resize.cur
+11 = nesw-resize.cur
+12 = all-scroll.cur
+13 = up-arrow.cur
+14 = pointer.cur
