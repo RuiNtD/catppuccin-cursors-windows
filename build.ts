@@ -1,6 +1,7 @@
 import $, { Path } from "@david/dax";
 import { Uint8ArrayWriter, ZipReader } from "@zip-js/zip-js";
 import * as ini from "@std/ini";
+import { expandGlob } from "@std/fs";
 
 const cursors = [
   "default.cur", // Normal Select
@@ -66,16 +67,18 @@ if (import.meta.main) {
   const outdir = $.path("win");
   await outdir.emptyDir();
 
+const cursorsDir = $.path("orig/cursors");
   const pb = $.progress("Building", {
-    length: [...$.path("orig/cursors").readDirSync()].length,
+    length: [...cursorsDir.readDirSync()].length,
   });
   await pb.with(async () => {
-    for await (const zip of $.path("orig/cursors").expandGlob("*.zip")) {
-      const basename = zip.path.withExtname("").basename();
+    for await (const zip of expandGlob(cursorsDir.join("*.zip").toString())) {
+      const path = $.path(zip.path);
+      const basename = path.withExtname("").basename();
       const indir = temp.join(basename);
       pb.message(basename.replaceAll("-", " "));
 
-      const zipReader = new ZipReader(await zip.path.open());
+      const zipReader = new ZipReader(await path.open());
       for await (const entry of zipReader.getEntriesGenerator()) {
         if (!entry.getData) continue;
 
