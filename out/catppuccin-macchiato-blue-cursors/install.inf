@@ -1,0 +1,26 @@
+[Version]
+signature = $CHICAGO$
+[DefaultInstall]
+CopyFiles = Scheme.Cur, Scheme.Txt
+AddReg = Scheme.Reg
+[DestinationDirs]
+Scheme.Cur = 10,"Cursors\catppuccin-macchiato-blue-cursors"
+Scheme.Txt = 10,"Cursors\catppuccin-macchiato-blue-cursors"
+[Scheme.Reg]
+0 = HKCU,"Control Panel\Cursors\Schemes","Catppuccin Macchiato Blue",0x00020000,"%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\default.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\help.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\progress.ani,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\wait.ani,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\crosshair.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\text.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\pencil.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\not-allowed.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_ver.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_hor.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_fdiag.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_bdiag.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\all-scroll.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\up-arrow.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\pointer.cur,,"
+[Scheme.Cur]
+0 = default.cur
+1 = help.cur
+2 = progress.ani
+3 = wait.ani
+4 = crosshair.cur
+5 = text.cur
+6 = pencil.cur
+7 = not-allowed.cur
+8 = size_ver.cur
+9 = size_hor.cur
+10 = size_fdiag.cur
+11 = size_bdiag.cur
+12 = all-scroll.cur
+13 = up-arrow.cur
+14 = pointer.cur
