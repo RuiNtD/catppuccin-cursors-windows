@@ -28,6 +28,8 @@ export function capitalize(str: string) {
 
 if (import.meta.main) {
   const outBase = $.path("out");
+  const distBase = $.path("dist");
+  await distBase.ensureDir();
 
   const pb = $.progress("Zipping", {
     length: flavors.length * accents.length,
@@ -42,7 +44,7 @@ if (import.meta.main) {
         pb.message(`${schemeName} Cursors`);
 
         const inDir = outBase.join(basename);
-        const outZip = outBase.join(`${basename}.zip`);
+        const outZip = distBase.join(`${basename}.zip`);
 
         const zipWriter = new ZipWriter(
           await outZip.open({ write: true, create: true })
