@@ -62,10 +62,16 @@ export function capitalize(str: string) {
 }
 
 if (import.meta.main) {
-  const temp = $.path("temp");
-  await temp.emptyDir();
-  const outBase = $.path("out");
-  await outBase.emptyDir();
+  const temp = await $.path("temp").emptyDir();
+  const outBase = await $.path("out").emptyDir();
+
+  let cacheBase = await $.path("cache").ensureDir();
+  // Delete old caches
+  for await (const file of cacheBase.readDir()) {
+    if (file.name == baseTag) continue;
+    await file.path.remove({ recursive: true });
+  }
+  cacheBase = await cacheBase.join(baseTag).ensureDir();
 
   const pb = $.progress("Building", {
     length: flavors.length * accents.length,
@@ -80,7 +86,7 @@ if (import.meta.main) {
         const url = `https://github.com/catppuccin/cursors/releases/download/${baseTag}/${basename}.zip`;
         pb.message(`${schemeName} Cursors`);
 
-        const zip = $.path("cache").join(baseTag, basename).withExtname(".zip");
+        const zip = cacheBase.join(basename).withExtname(".zip");
         if (!(await zip.exists())) {
           await zip.ensureFile();
           await $.request(url).showProgress().pipeToPath(zip);
