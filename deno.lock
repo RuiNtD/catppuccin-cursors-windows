@@ -14,7 +14,6 @@
     "jsr:@std/path@1": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/streams@0.221": "0.221.0",
-    "jsr:@std/text@^1.0.10": "1.0.10",
     "jsr:@zip-js/zip-js@^2.7.54": "2.7.54",
     "npm:is-admin@*": "4.0.0",
     "npm:is-admin@4": "4.0.0"
@@ -75,9 +74,6 @@
       "dependencies": [
         "jsr:@std/io"
       ]
-    },
-    "@std/text@1.0.10": {
-      "integrity": "9dcab377450253c0efa9a9a0c731040bfd4e1c03f8303b5934381467b7954338"
     },
     "@zip-js/zip-js@2.7.54": {
       "integrity": "a28b93b56a6cb2ed0f613355b2e9120ea9f6e9703dd6ae1bbc0088cfa3fef692"
@@ -171,7 +167,6 @@
     "dependencies": [
       "jsr:@david/dax@0.42",
       "jsr:@std/ini@~0.225.2",
-      "jsr:@std/text@^1.0.10",
       "jsr:@zip-js/zip-js@^2.7.54",
       "npm:is-admin@4"
     ]

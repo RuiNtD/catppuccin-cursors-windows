@@ -1,28 +1,7 @@
 import $, { Path } from "@david/dax";
-import { Uint8ArrayWriter, ZipReader, ZipWriter } from "@zip-js/zip-js";
+import { Uint8ArrayWriter, ZipReader } from "@zip-js/zip-js";
 import * as ini from "@std/ini";
-
-const baseTag = "v1.0.2";
-
-const accents = [
-  "blue",
-  "dark",
-  "flamingo",
-  "green",
-  "lavender",
-  "light",
-  "maroon",
-  "mauve",
-  "peach",
-  "pink",
-  "red",
-  "rosewater",
-  "sapphire",
-  "sky",
-  "teal",
-  "yellow",
-];
-const flavors = ["frappe", "latte", "macchiato", "mocha"];
+import { flavors, accents, baseTag } from "./consts.ts";
 
 const cursors = [
   "default.cur", // Normal Select
@@ -50,10 +29,11 @@ const inCursors = cursors
 
 async function processFolder(inDir: Path, outDir: Path, schemeName: string) {
   await outDir.mkdir();
-  await $`pipx run -q x2wincur ${inCursors} -o ${outDir.resolve()}`.cwd(inDir);
+  await $`pipx run x2wincur ${inCursors} -o ${outDir.resolve()}`.cwd(inDir);
 
   const cursorDir = `Cursors\\${outDir.basename()}`;
   const regCursors = cursors
+    // `v &&` filters out the empty entries
     .map((v) => v && `%SYSTEMROOT%\\${cursorDir}\\${v}`)
     .join(",");
 
@@ -72,9 +52,9 @@ async function processFolder(inDir: Path, outDir: Path, schemeName: string) {
     ],
     "Scheme.Cur": cursors.filter(Boolean),
   };
-  await outDir
-    .join("install.inf")
-    .writeText(ini.stringify(installInf, { pretty: true }));
+
+  const infFile = outDir.join("install.inf");
+  await infFile.writeText(ini.stringify(installInf, { pretty: true }));
 }
 
 export function capitalize(str: string) {
@@ -121,21 +101,12 @@ if (import.meta.main) {
         const outDir = outBase.join(basename);
         await processFolder(inDir, outDir, schemeName);
 
-        const zipWriter = new ZipWriter(
-          await outBase
-            .join(`${basename}.zip`)
-            .open({ write: true, create: true })
-        );
-        for await (const file of outDir.readDirFilePaths())
-          await zipWriter.add(
-            `${basename}/${file.basename()}`,
-            await file.open()
-          );
-        await zipWriter.close();
-
         // outdir.join(basename).remove({ recursive: true });
         pb.increment();
       }
   });
-  await temp.remove({ recursive: true });
+
+  await $.progress("Cleaning up...").with(async () => {
+    await temp.remove({ recursive: true });
+  });
 }
