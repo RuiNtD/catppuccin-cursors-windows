@@ -1,21 +1,21 @@
 export const baseTag = "v2.0.0";
 
+export const flavors = ["latte", "frappe", "macchiato", "mocha"];
 export const accents = [
-  "blue",
-  "dark",
-  "flamingo",
-  "green",
-  "lavender",
-  "light",
-  "maroon",
-  "mauve",
-  "peach",
-  "pink",
-  "red",
   "rosewater",
-  "sapphire",
-  "sky",
-  "teal",
+  "flamingo",
+  "pink",
+  "mauve",
+  "red",
+  "maroon",
+  "peach",
   "yellow",
+  "green",
+  "teal",
+  "sky",
+  "sapphire",
+  "blue",
+  "lavender",
+  "dark",
+  "light",
 ];
-export const flavors = ["frappe", "latte", "macchiato", "mocha"];

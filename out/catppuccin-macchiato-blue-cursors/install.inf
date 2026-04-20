@@ -1,26 +1,51 @@
+; Right click on this file in Windows Explorer and select "Install".
+; Then, run `main.cpl` and select the cursor theme "Catppuccin Macchiato Blue".
+
 [Version]
-signature = $CHICAGO$
+Signature = "$CHICAGO$"
+
 [DefaultInstall]
-CopyFiles = Scheme.Cur, Scheme.Txt
-AddReg = Scheme.Reg
+CopyFiles = Scheme.Cur
+AddReg    = Scheme.Reg
+
 [DestinationDirs]
-Scheme.Cur = 10,"Cursors\catppuccin-macchiato-blue-cursors"
-Scheme.Txt = 10,"Cursors\catppuccin-macchiato-blue-cursors"
+Scheme.Cur = 10,"%CUR_DIR%"
+
 [Scheme.Reg]
-0 = HKCU,"Control Panel\Cursors\Schemes","Catppuccin Macchiato Blue",0x00020000,"%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\default.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\help.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\progress.ani,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\wait.ani,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\crosshair.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\text.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\pencil.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\not-allowed.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_ver.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_hor.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_fdiag.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\size_bdiag.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\all-scroll.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\up-arrow.cur,%SYSTEMROOT%\Cursors\catppuccin-macchiato-blue-cursors\pointer.cur,,"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\Cursors\Schemes","%SCHEME_NAME%",,"%10%\%CUR_DIR%\%arrow%,%10%\%CUR_DIR%\%help%,%10%\%CUR_DIR%\%working%,%10%\%CUR_DIR%\%wait%,%10%\%CUR_DIR%\%crosshair%,%10%\%CUR_DIR%\%text%,%10%\%CUR_DIR%\%pen%,%10%\%CUR_DIR%\%unavailable%,%10%\%CUR_DIR%\%size_ns%,%10%\%CUR_DIR%\%size_ew%,%10%\%CUR_DIR%\%size_nwse%,%10%\%CUR_DIR%\%size_nesw%,%10%\%CUR_DIR%\%move%,%10%\%CUR_DIR%\%up_arrow%,%10%\%CUR_DIR%\%link%,,"
+
 [Scheme.Cur]
-0 = default.cur
-1 = help.cur
-2 = progress.ani
-3 = wait.ani
-4 = crosshair.cur
-5 = text.cur
-6 = pencil.cur
-7 = not-allowed.cur
-8 = size_ver.cur
-9 = size_hor.cur
-10 = size_fdiag.cur
-11 = size_bdiag.cur
-12 = all-scroll.cur
-13 = up-arrow.cur
-14 = pointer.cur
+arrow.cur
+help.cur
+working.ani
+wait.ani
+crosshair.cur
+text.cur
+pen.cur
+unavailable.cur
+size_ns.cur
+size_ew.cur
+size_nwse.cur
+size_nesw.cur
+move.cur
+up_arrow.cur
+link.cur
+
+[Strings]
+CUR_DIR = "Cursors\Catppuccin Macchiato Blue"
+SCHEME_NAME = "Catppuccin Macchiato Blue"
+arrow = "arrow.cur"
+help = "help.cur"
+working = "working.ani"
+wait = "wait.ani"
+crosshair = "crosshair.cur"
+text = "text.cur"
+pen = "pen.cur"
+unavailable = "unavailable.cur"
+size_ns = "size_ns.cur"
+size_ew = "size_ew.cur"
+size_nwse = "size_nwse.cur"
+size_nesw = "size_nesw.cur"
+move = "move.cur"
+up_arrow = "up_arrow.cur"
+link = "link.cur"

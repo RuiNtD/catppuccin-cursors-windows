@@ -1,65 +1,23 @@
-import $, { Path } from "@david/dax";
-import { Uint8ArrayWriter, ZipReader } from "@zip-js/zip-js";
-import * as ini from "@std/ini";
+import $, { ProgressBar } from "@david/dax";
 import { flavors, accents, baseTag } from "./consts.ts";
+import { flatten } from "es-toolkit/array";
+import { startCase } from "es-toolkit/string";
+import pMap from "p-map";
 
-const cursors = [
-  "default.cur", // Normal Select
-  "help.cur", // Help Select
-  "progress.ani", // Working in Background
-  "wait.ani", // Busy
-  "crosshair.cur", // Precision Select
-  "text.cur", // Text Select
-  "pencil.cur", // Handwriting
-  "not-allowed.cur", // Unavailable
-  "size_ver.cur", // Vertical Resize
-  "size_hor.cur", // Horizontal Resize
-  "size_fdiag.cur", // Diagonal Resize 1
-  "size_bdiag.cur", // Diagonal Resize 2
-  "all-scroll.cur", // Move
-  "up-arrow.cur", // Alternate Select
-  "pointer.cur", // Link Select
-  "", // Location Select
-  "", // Person Select
-];
+const batHeader = `
+@echo off
+:: Check for administrative permissions
+net session >nul 2>&1
+if %errorLevel% == 0 (
+  echo Installing Catppuccin cursors...
+) else (
+  echo Requesting administrative privileges...
+  powershell start-process '%~f0' -verb runas
+  exit /b
+)
 
-const inCursors = cursors
-  .filter(Boolean)
-  .map((v) => $.path(v).withExtname("").basename());
-
-async function processFolder(inDir: Path, outDir: Path, schemeName: string) {
-  await outDir.mkdir();
-  await $`pipx run x2wincur ${inCursors} -o ${outDir.resolve()}`.cwd(inDir);
-
-  const cursorDir = `Cursors\\${outDir.basename()}`;
-  const regCursors = cursors
-    // `v &&` filters out the empty entries
-    .map((v) => v && `%SYSTEMROOT%\\${cursorDir}\\${v}`)
-    .join(",");
-
-  const installInf = {
-    Version: { signature: "$CHICAGO$" },
-    DefaultInstall: {
-      CopyFiles: "Scheme.Cur, Scheme.Txt",
-      AddReg: "Scheme.Reg",
-    },
-    DestinationDirs: {
-      "Scheme.Cur": `10,"${cursorDir}"`,
-      "Scheme.Txt": `10,"${cursorDir}"`,
-    },
-    "Scheme.Reg": [
-      `HKCU,"Control Panel\\Cursors\\Schemes","${schemeName}",0x00020000,"${regCursors}"`,
-    ],
-    "Scheme.Cur": cursors.filter(Boolean),
-  };
-
-  const infFile = outDir.join("install.inf");
-  await infFile.writeText(ini.stringify(installInf, { pretty: true }));
-}
-
-export function capitalize(str: string) {
-  return str.substring(0, 1).toUpperCase() + str.substring(1);
-}
+cd /d "%~dp0"
+`;
 
 if (import.meta.main) {
   const temp = await $.path("temp").emptyDir();
@@ -73,43 +31,90 @@ if (import.meta.main) {
   }
   cacheBase = await cacheBase.join(baseTag).ensureDir();
 
-  const pb = $.progress("Building", {
+  let pb: ProgressBar;
+
+  pb = $.progress("Downloading", {
     length: flavors.length * accents.length,
   });
   await pb.with(async () => {
     for (const flavor of flavors)
       for (const accent of accents) {
-        const flavorName = capitalize(flavor);
-        const accentName = capitalize(accent);
-        const schemeName = `Catppuccin ${flavorName} ${accentName}`;
         const basename = `catppuccin-${flavor}-${accent}-cursors`;
         const url = `https://github.com/catppuccin/cursors/releases/download/${baseTag}/${basename}.zip`;
-        pb.message(`${schemeName} Cursors`);
+        pb.message(startCase(basename));
 
-        const zip = cacheBase.join(basename).withExtname(".zip");
-        if (!(await zip.exists())) {
-          await zip.ensureFile();
-          await $.request(url).showProgress().pipeToPath(zip);
+        const zipFile = cacheBase.join(basename).withExtname(".zip");
+        if (!(await zipFile.exists())) {
+          await zipFile.ensureFile();
+          await $.request(url).showProgress().pipeToPath(zipFile);
         }
 
-        const zipReader = new ZipReader(await zip.open());
-        for await (const entry of zipReader.getEntriesGenerator()) {
-          if (!entry.getData) continue;
+        pb.increment();
+      }
+  });
 
-          const uint8 = await entry.getData(new Uint8ArrayWriter());
-          const filePath = temp.join(entry.filename);
+  pb = $.progress("Extracting...", {
+    length: flavors.length * accents.length,
+  });
+  await pb.with(async () => {
+    await pMap(
+      flatten(
+        flavors.map((flavor) =>
+          accents.map((accent) => [flavor, accent] as const),
+        ),
+      ),
+      async ([flavor, accent]) => {
+        const basename = `catppuccin-${flavor}-${accent}-cursors`;
+        // pb.message(startCase(basename));
 
-          if (entry.directory) await filePath.ensureDir();
-          else await filePath.write(uint8);
-        }
+        const zipFile = cacheBase.join(basename).withExtname(".zip");
+
+        // Doesn't work with symlinks :(
+        // const zip = new AdmZip(`${zipFile}`);
+        // zip.extractAllTo(`${temp}`);
+        await $`7z x ${zipFile} -o${temp} ${basename}/cursors/`.quiet();
+
+        pb.increment();
+      },
+      { concurrency: 1 },
+    );
+  });
+
+  pb = $.progress("Building", {
+    length: flavors.length * accents.length,
+  });
+  await pb.with(async () => {
+    for (const flavor of flavors) {
+      for (const accent of accents) {
+        const basename = `catppuccin-${flavor}-${accent}-cursors`;
+        pb.message(startCase(basename));
 
         const inDir = temp.join(basename, "cursors");
-        const outDir = outBase.join(basename);
-        await processFolder(inDir, outDir, schemeName);
+        const outDir = await outBase.join(basename).ensureDir();
+        // await processFolder(inDir, outDir);
+        const schemeName = startCase(basename)
+          .replace(" Cursors", "")
+          .replace("Frappe", "Frappé");
+        await $`pipx run --spec win2xcur x2wincurtheme ${inDir} -o ${outDir} -n ${schemeName}`;
 
         // outdir.join(basename).remove({ recursive: true });
         pb.increment();
       }
+
+      const lines = accents
+        .map((accent) => `catppuccin-${flavor}-${accent}-cursors`)
+        .map((v) => `InfDefaultInstall ${v}\\install.inf`);
+      outBase
+        .join(`install-all-${flavor}.bat`)
+        .writeText(batHeader + lines.join("\n"));
+    }
+
+    const lines = flatten(
+      flavors.map((flavor) =>
+        accents.map((accent) => `catppuccin-${flavor}-${accent}-cursors`),
+      ),
+    ).map((v) => `InfDefaultInstall ${v}\\install.inf`);
+    outBase.join(`install-all.bat`).writeText(batHeader + lines.join("\n"));
   });
 
   await $.progress("Cleaning up...").with(async () => {

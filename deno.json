@@ -1,13 +1,13 @@
 {
   "tasks": {
     "build": "deno run -A src/build.ts",
-    "zip": "deno run -A src/zip.ts",
-    "installAll": "sudo deno run -A src/installAll.ts"
+    "zip": "deno run -A src/zip.ts"
   },
   "imports": {
-    "@david/dax": "jsr:@david/dax@^0.42.0",
-    "@std/ini": "jsr:@std/ini@^0.225.2",
-    "@zip-js/zip-js": "jsr:@zip-js/zip-js@^2.7.54",
-    "is-admin": "npm:is-admin@^4.0.0"
+    "@david/dax": "jsr:@david/dax@^0.45.0",
+    "@types/adm-zip": "npm:@types/adm-zip@^0.5.8",
+    "adm-zip": "npm:adm-zip@^0.5.17",
+    "es-toolkit": "npm:es-toolkit@^1.45.1",
+    "p-map": "npm:p-map@^7.0.4"
   }
 }
